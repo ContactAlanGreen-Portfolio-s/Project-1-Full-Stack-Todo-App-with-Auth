@@ -3,8 +3,8 @@
 // redirected to /signin instantly, before any React code runs.
 // Without this, protected pages would flash before redirecting.
 
-import { withAuth } from 'next-auth/middleware';
-import { NextResponse } from 'next/server';
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
@@ -14,16 +14,16 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,  // true = allow, false = redirect to signIn
+      authorized: ({ token }) => !!token, // true = allow, false = redirect to signIn
     },
-  }
+  },
 );
 
 // Which routes to protect — everything except public pages
 export const config = {
   matcher: [
-    '/dashboard/:path*',
-    '/api/todos/:path*',
+    "/dashboard/:path*",
+    "/api/todos/:path*",
     // Add more protected routes here
   ],
 };
