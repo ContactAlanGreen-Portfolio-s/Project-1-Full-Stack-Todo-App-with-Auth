@@ -1,32 +1,48 @@
+// src/app/(auth)/signin/page.tsx
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export default function SignInPage() {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Click below to sign in with your GitHub account
-          </p>
-        </div>
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+  const error = searchParams.get("error");
 
-        <Button
-          variant="outline"
-          type="button"
-          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-          className="flex items-center gap-2"
-        >
-          <GitHubLogoIcon className="h-4 w-4" />
-          Continue with GitHub
-        </Button>
-      </div>
-    </div>
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-muted/30">
+      <Card className="w-full max-w-sm">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardDescription>Sign in to access your tasks</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {error && (
+            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              {error === "OAuthAccountNotLinked"
+                ? "This email is already registered with a different provider."
+                : "Authentication failed. Please try again."}
+            </div>
+          )}
+
+          <Button
+            className="w-full"
+            onClick={() => signIn("github", { callbackUrl })}
+          >
+            <GitHubLogoIcon className="mr-2 h-4 w-4" />
+            Continue with GitHub
+          </Button>
+        </CardContent>
+      </Card>
+    </main>
   );
 }
