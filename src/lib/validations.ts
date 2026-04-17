@@ -8,11 +8,12 @@ import { z } from "zod";
 export const createTodoSchema = z.object({
   title: z.string().min(1, "Title is required").max(200).trim(),
   description: z.string().max(500).trim().optional(),
-  priority: z.enum(["LOW", "MEDIUM", "HIGH"]),
+  priority: z.enum(["LOW", "MEDIUM", "HIGH"]).optional().default("MEDIUM"),
   dueDate: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD")
-    .optional(),
+    .optional()
+    .nullable(),
 });
 
 export const updateTodoSchema = createTodoSchema

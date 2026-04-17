@@ -110,6 +110,16 @@ export function useUpdateTodo() {
       queryClient.invalidateQueries({ queryKey: TODOS_KEY });
     },
 
+    onSuccess: (_, variables) => {
+      if (variables.data.status === "DONE") {
+        toast.success("Task completed");
+      } else if (variables.data.status === "PENDING") {
+        toast.success("Task reopened");
+      } else {
+        toast.success("Task updated");
+      }
+    },
+
     onError: () => {
       toast.error("Failed to update task");
     },
