@@ -5,14 +5,14 @@ import { useMemo, useState } from "react";
 import { useTodos } from "@/hooks/use-todos";
 import { TodoItem } from "./todo-item";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { TodoStatus, Priority } from "@/types";
 
 type Filter = "ALL" | TodoStatus;
 
 export function TodoList() {
-  const { data, isLoading, error } = useTodos();
+  const { data, isLoading, error, refetch } = useTodos();
   const [filter, setFilter] = useState<Filter>("ALL");
 
   const filteredTodos = useMemo(() => {
@@ -35,20 +35,33 @@ export function TodoList() {
   // Error state
   if (error) {
     return (
-      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive text-sm">
-        Failed to load tasks. Please refresh the page.
+      <div className="flex flex-col items-center justify-center space-y-3 rounded-lg border border-destructive/50 bg-destructive/10 p-6 text-destructive">
+        <AlertCircle className="h-6 w-6" />
+        <p className="text-sm font-medium">Failed to load tasks.</p>
+        <button
+          onClick={() => refetch()}
+          className="text-xs underline hover:no-underline"
+        >
+          Try again
+        </button>
       </div>
     );
   }
 
   // Empty state
   if (filteredTodos.length === 0) {
+    const isFilterEmpty = data?.data && data.data.length > 0;
+
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <ClipboardList className="h-12 w-12 text-muted-foreground/50 mb-4" />
-        <h3 className="font-semibold text-muted-foreground">No tasks yet</h3>
+        <h3 className="font-semibold text-muted-foreground">
+          {isFilterEmpty ? `No ${filter.toLowerCase()} tasks` : "No tasks yet"}
+        </h3>
         <p className="text-sm text-muted-foreground mt-1">
-          Add a task above to get started.
+          {isFilterEmpty
+            ? "Change your filter to see more."
+            : "Add a task above to get started."}
         </p>
       </div>
     );

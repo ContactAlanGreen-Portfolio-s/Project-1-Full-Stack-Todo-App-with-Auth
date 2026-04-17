@@ -22,7 +22,9 @@ async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
 
   if (res.status === 204) return null as T;
   const json = await res.json();
-  return json.data;
+  // If json.data exists, return it. Otherwise, just return the raw json.
+  // The ?? null ensures we NEVER return undefined.
+  return json.data !== undefined ? json.data : (json ?? null);
 }
 
 // ─── Queries (read) ───────────────────────────────────────────────────────────

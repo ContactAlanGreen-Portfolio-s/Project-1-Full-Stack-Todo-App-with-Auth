@@ -12,9 +12,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, CheckSquare } from "lucide-react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export function Header() {
   const { data: session } = useSession();
+
+  useEffect(() => {
+    function handleOffline() {
+      toast.error("Check your connection", {
+        description: "You are currently offline.",
+        duration: Infinity, // Stays until they reconnect
+        id: "offline-toast",
+      });
+    }
+
+    function handleOnline() {
+      toast.dismiss("offline-toast");
+      toast.success("Back online!");
+    }
+
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("online", handleOnline);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-sm">

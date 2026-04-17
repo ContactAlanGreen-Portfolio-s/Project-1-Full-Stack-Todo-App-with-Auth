@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { Trash2, Calendar } from "lucide-react";
+import { Trash2, Calendar, Loader2 } from "lucide-react";
 import { useUpdateTodo, useDeleteTodo } from "@/hooks/use-todos";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -97,7 +97,11 @@ export function TodoItem({ todo }: TodoItemProps) {
         onClick={handleDelete}
         disabled={isDeleting}
       >
-        <Trash2 className="h-4 w-4" />
+        {isDeleting ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Trash2 className="h-4 w-4" />
+        )}
         <span className="sr-only">Delete task</span>
       </Button>
     </div>
