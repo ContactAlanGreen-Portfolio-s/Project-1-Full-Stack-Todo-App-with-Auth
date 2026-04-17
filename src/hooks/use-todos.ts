@@ -56,16 +56,17 @@ export function useCreateTodo() {
 
       queryClient.setQueryData(
         TODOS_KEY,
-        (old: { data: Todo[] } | undefined) => ({
+        (old: { data: Todo[]; count: number } | undefined) => ({
           ...old,
+          count: (old?.count || 0) + 1,
           data: [
             {
               id: "temp-" + Date.now(),
               ...newTodo,
               status: "PENDING",
               createdAt: new Date().toISOString(),
-            },
-            // Use optional chaining fallback in case old.data is undefined
+              updatedAt: new Date().toISOString(),
+            } as unknown as Todo,
             ...(old?.data || []),
           ],
         }),
@@ -80,8 +81,13 @@ export function useCreateTodo() {
       toast.error("Failed to create task");
     },
 
+    // onSettled fires whether the mutation succeeds OR fails.
+    // It guarantees our UI syncs up perfectly with the real database.
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: TODOS_KEY });
+    },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: TODOS_KEY }); // refetch real data
       toast.success("Task created");
     },
   });
@@ -97,7 +103,7 @@ export function useUpdateTodo() {
         body: JSON.stringify(data),
       }),
 
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: TODOS_KEY });
     },
 
@@ -114,8 +120,11 @@ export function useDeleteTodo() {
     mutationFn: (id: string) =>
       fetchJSON<null>(`/api/todos/${id}`, { method: "DELETE" }),
 
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: TODOS_KEY });
+    },
+
+    onSuccess: () => {
       toast.success("Task deleted");
     },
 

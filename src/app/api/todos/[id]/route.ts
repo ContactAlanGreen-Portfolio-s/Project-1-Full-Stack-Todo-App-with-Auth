@@ -8,6 +8,7 @@ import {
   errorResponse,
   withErrorHandler,
 } from "@/lib/api-helpers";
+export const dynamic = "force-dynamic";
 
 async function getTodoOrFail(id: string, userId: string) {
   const todo = await db.todo.findFirst({
