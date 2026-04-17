@@ -28,7 +28,7 @@ import type { Todo } from "@/types";
 // ── Priority badge styles ──────────────────────────────────────────────────────
 // Lookup table that maps a priority level to its Tailwind colour classes.
 // Using a constant object is cleaner than a switch/if-else chain.
-const PRIORITY_STYLES = {
+const PRIORITY_STYLES: Record<string, string> = {
   HIGH:   "bg-red-100 text-red-700 border-red-200",
   MEDIUM: "bg-yellow-100 text-yellow-700 border-yellow-200",
   LOW:    "bg-green-100 text-green-700 border-green-200",
