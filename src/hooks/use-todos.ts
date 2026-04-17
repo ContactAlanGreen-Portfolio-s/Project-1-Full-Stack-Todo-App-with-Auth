@@ -23,9 +23,12 @@ async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
 
   if (res.status === 204) return null as T;
   const json = await res.json();
-  // If json.data exists, return it. Otherwise, just return the raw json.
-  // The ?? null ensures we NEVER return undefined.
-  return json.data !== undefined ? json.data : (json ?? null);
+  // Only strip 'data' wrapper if it's the only property (for single-item mutations)
+  // If there are other properties like 'count', keep the full response
+  if (json.data !== undefined && Object.keys(json).length === 1) {
+    return json.data;
+  }
+  return json ?? null;
 }
 
 // ─── Queries (read) ───────────────────────────────────────────────────────────

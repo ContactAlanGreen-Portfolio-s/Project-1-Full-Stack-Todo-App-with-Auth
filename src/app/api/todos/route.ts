@@ -18,8 +18,8 @@ export const GET = withErrorHandler(async () => {
     orderBy: { createdAt: "desc" },
   });
 
-  // Returns { items: [...], count: X }
-  return successResponse({ items: todos, count: todos.length });
+  // Returns { data: [...], count: X }
+  return successResponse({ data: todos, count: todos.length });
 });
 
 export const POST = withErrorHandler(async (req: NextRequest) => {
