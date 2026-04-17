@@ -8,6 +8,7 @@ import {
   errorResponse,
   withErrorHandler,
 } from "@/lib/api-helpers";
+export const dynamic = "force-dynamic";
 
 export const GET = withErrorHandler(async () => {
   const session = await requireAuth();

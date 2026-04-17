@@ -1,7 +1,6 @@
 // src/components/todos/todo-item.tsx
 "use client";
 
-import { useState } from "react";
 import { format } from "date-fns";
 import { Trash2, Calendar, Loader2 } from "lucide-react";
 import { useUpdateTodo, useDeleteTodo } from "@/hooks/use-todos";

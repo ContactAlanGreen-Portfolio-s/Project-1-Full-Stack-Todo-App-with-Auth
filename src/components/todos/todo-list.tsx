@@ -7,7 +7,7 @@ import { TodoItem } from "./todo-item";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ClipboardList, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { TodoStatus, Priority } from "@/types";
+import type { TodoStatus } from "@/types";
 
 type Filter = "ALL" | TodoStatus;
 
