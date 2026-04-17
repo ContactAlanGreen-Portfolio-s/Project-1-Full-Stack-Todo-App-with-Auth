@@ -2,9 +2,11 @@
 
 # Full-Stack Todo App with Authentication
 
-<!-- PROJECT BANNER -->
-<!-- Replace the line below with your screenshot: ![App Screenshot](./docs/screenshot.png) -->
-> 📸 **Add your screenshot here:** `![App Screenshot](./docs/screenshot.png)`
+| | |
+|---|---|
+| ![Homepage](./docs/todoapp-homepage.png) | ![Dashboard](./docs/todoapp-dashboard.png) |
+| *Landing page — clean sign-in entry point* | *Dashboard — task management with priority badges and filters* |
+
 
 **A production-grade task management application built to demonstrate full-stack engineering skills — from database schema design to OAuth authentication to CI/CD deployment.**
 
@@ -71,17 +73,16 @@ This project followed a structured Software Development Life Cycle (SDLC) — no
 
 1. **Requirements & Scoping** — Core features were defined upfront and documented as GitHub Issues before a single line of code was written.
 2. **Architecture Design** — The database schema, API contract, and component hierarchy were planned before implementation. Decisions on server vs. client component boundaries were made deliberately.
-3. **Iterative Development** — Work was tracked using a **GitHub Projects Kanban board** with columns for Backlog, In Progress, In Review, and Done. Each feature was developed on its own branch and merged via pull request.
+3. **Iterative Development** — Work was tracked using a **[GitHub Projects Kanban Board](https://github.com/orgs/ContactAlanGreen-Portfolio-s/projects/1)** with columns for Backlog, In Progress, In Review, and Done. Each feature was developed on its own branch and merged via pull request.
 4. **Test-Driven Validation** — A dedicated testing guide (`testing_guide_project1.md`) was authored before tests were written, outlining what each phase of testing needed to cover.
 5. **CI/CD & Deployment** — A GitHub Actions workflow (`.github/workflows/ci.yml`) enforces the full test suite on every push to `main`, with automatic deployment to Vercel on success.
 
 ### Planning Artefacts
 
-> 📎 **Add your links here:**
-> - Database Schema Diagram: *(link to your ERD or Prisma schema diagram)*
-> - GitHub Projects Board: *(link to your Kanban board)*
-> - Project Planning Document: *(link to your planning .md file)*
-> - Testing Guide: [`testing_guide_project1.md`](./testing_guide_project1.md)
+> - 🗄️ **Database Schema (ERD):**
+> ![Database Schema](./docs/database-schema.png)
+> - 📋 **GitHub Projects Board:** [View Kanban Board](https://github.com/orgs/ContactAlanGreen-Portfolio-s/projects/1)
+> - 🧪 **Testing Guide:** [`testing_guide_project1.md`](./testing_guide_project1.md)
 
 ---
 
