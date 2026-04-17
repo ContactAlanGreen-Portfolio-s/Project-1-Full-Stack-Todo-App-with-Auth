@@ -19,13 +19,4 @@ export type { Todo, TodoStatus, Priority };
 
 export type TodoWithoutUserId = Omit<Todo, 'userId'>;
 
-export type CreateTodoInput = {
-  title: string;
-  description?: string;
-  priority?: Priority;
-  dueDate?: string;
-};
-
-export type UpdateTodoInput = Partial<CreateTodoInput> & {
-  status?: TodoStatus;
-};
+export type { CreateTodoInput, UpdateTodoInput } from '@/lib/validations';

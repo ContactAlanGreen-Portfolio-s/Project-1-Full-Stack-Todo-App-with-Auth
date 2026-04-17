@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { TextEncoder, TextDecoder } = require('util');
 const { TransformStream, ReadableStream, WritableStream } = require('node:stream/web');
 const { MessageChannel, MessagePort } = require('node:worker_threads');

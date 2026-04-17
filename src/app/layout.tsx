@@ -1,4 +1,16 @@
-// src/app/layout.tsx — wrap app in providers
+// src/app/layout.tsx
+// ─────────────────────────────────────────────────────────────────────────────
+// Root Layout — wraps the entire application in global providers.
+//
+// "use client" — required because SessionProvider and QueryClientProvider
+// rely on React Context, which is a browser-only feature. The Next.js
+// convention is often to split providers into a separate client component,
+// but for simplicity, the root layout can be a client component itself.
+//
+// PROVIDERS EXPLAINED:
+// • SessionProvider: Lets any client component call useSession()
+// • QueryClientProvider: Powers the useTodos() and useCreateTodo() hooks
+// • Toaster: Global popup notifications (e.g. "Task saved!")
 "use client";
 
 import { SessionProvider } from "next-auth/react";

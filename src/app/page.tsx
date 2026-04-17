@@ -1,4 +1,10 @@
 // src/app/page.tsx
+// ─────────────────────────────────────────────────────────────────────────────
+// The landing page of the application (e.g., https://yourapp.com/).
+//
+// This is a Server Component. It checks if the user is already logged in
+// BEFORE returning any HTML. If they are, it instantly redirects to /dashboard.
+// If not, it shows the marketing copy and a "Get started" button.
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";

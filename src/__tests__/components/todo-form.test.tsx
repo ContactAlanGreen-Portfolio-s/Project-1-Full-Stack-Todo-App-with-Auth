@@ -2,6 +2,7 @@
 // Uses jest.mock to intercept the useTodos hook rather than MSW server,
 // which avoids the ESM/jsdom incompatibility with MSW's rettime dependency.
 import { describe, it, expect, jest, beforeEach } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
